@@ -1,4 +1,4 @@
-package com.example.pmdm.RicardoComponent
+package com.example.pmdm.ricardoComponent
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.Text
@@ -11,10 +11,11 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun TextComponent(
+    modifier: Modifier = Modifier,
     text: String,
     textSize: TextUnit = 10.sp,
-    textColor: Color = Color.White,
-    modifier: Modifier = Modifier
+    textColor: Color = Color.White
+
 ){
     Box{
         Text(
@@ -28,6 +29,6 @@ fun TextComponent(
 
 @Preview
 @Composable
-fun viewText(){
+fun ViewText(){
     TextComponent(text = "USER:", textSize = 10.sp)
 }

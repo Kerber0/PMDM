@@ -1,0 +1,55 @@
+package com.example.pmdm.navigation
+
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.List
+import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.ui.graphics.vector.ImageVector
+
+sealed class Destination(
+    val route: String,
+    val icon: ImageVector,
+    val label: String,
+    val contentDescription: String
+) {
+    object Start : Destination(
+        route = "start",
+        icon = Icons.Default.Home,
+        label = "Inicio",
+        contentDescription = "Pantalla de inicio"
+    )
+
+    object ListContend : Destination(
+        route = "listContend",
+        icon = Icons.AutoMirrored.Filled.List,
+        label = "Lista",
+        contentDescription = "Pantalla de lista"
+    )
+
+    object Details : Destination(
+        route = "details",
+        icon = Icons.Default.Info,
+        label = "Detalles",
+        contentDescription = "Pantalla de detalles"
+    )
+
+    object Profile : Destination(
+        route = "profile",
+        icon = Icons.Default.Person,
+        label = "Perfil",
+        contentDescription = "Pantalla de perfil"
+    )
+    object LoginPage : Destination(
+        route = "login",
+        icon = Icons.Default.AccountBox,
+        label = "Login",
+        contentDescription = "Pantalla de Login"
+
+    )
+    companion object {
+        val entries = listOf(Start, ListContend, Details, Profile, LoginPage)
+    }
+
+}

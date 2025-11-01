@@ -1,4 +1,4 @@
-package com.example.pmdm.NicolasComponent
+package com.example.pmdm.nicolasComponent
 
 import android.content.res.Configuration
 import android.util.Log

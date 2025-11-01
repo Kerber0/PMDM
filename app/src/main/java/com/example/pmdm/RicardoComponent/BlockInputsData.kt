@@ -1,4 +1,4 @@
-package com.example.pmdm.RicardoComponent
+package com.example.pmdm.ricardoComponent
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -8,9 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,14 +17,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 data class InputFieldConfig(
-    val TextLabel: String,
-    val TextValue: String
+    val textLabel: String,
+    val textValue: String
 )
 @Composable
 fun BlockInputsData(
+    modifier: Modifier = Modifier,
     title: String = "REGISTRATE",
     input: List<InputFieldConfig>,
-    modifier: Modifier = Modifier,
+
     borderColor: Color = Color.Black
 ){
     Box(modifier = Modifier
@@ -58,8 +57,8 @@ fun BlockInputsData(
             ) {
                 input.forEach { inputConfig ->
                     InputDataComponent(
-                        textValue = inputConfig.TextLabel,
-                        textInfo = inputConfig.TextValue
+                        textValue = inputConfig.textLabel,
+                        textInfo = inputConfig.textValue
                     )
                 }
             }
@@ -72,20 +71,20 @@ fun BlockInputsData(
 fun PreviewInputs(){
     val inputs = listOf(
         InputFieldConfig(
-            TextLabel = "USER:",
-            TextValue = "INTRODUCE USUARIO"
+            textLabel = "USER:",
+            textValue = "INTRODUCE USUARIO"
         ),
         InputFieldConfig(
-            TextLabel = "EMAIL:",
-            TextValue = "INTRODUCE EMAIL"
+            textLabel = "EMAIL:",
+            textValue = "INTRODUCE EMAIL"
         ),
         InputFieldConfig(
-            TextLabel = "PASSWORD:",
-            TextValue = "INTRODUCE PASSWORD"
+            textLabel = "PASSWORD:",
+            textValue = "INTRODUCE PASSWORD"
         ),
         InputFieldConfig(
-            TextLabel = "REPITE:",
-            TextValue = "CONFIRMA CONTRASEÑA"
+            textLabel = "REPITE:",
+            textValue = "CONFIRMA CONTRASEÑA"
         )
     )
     BlockInputsData(input = inputs)

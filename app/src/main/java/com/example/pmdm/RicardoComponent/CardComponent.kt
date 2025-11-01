@@ -1,4 +1,4 @@
-package com.example.pmdm.RicardoComponent
+package com.example.pmdm.ricardoComponent
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pmdm.R
 
-class CardConfig(var ImageId: Int, var ImageDesc: String = "", var Title: String)
+class CardConfig(var imageId: Int, var imageDesc: String = "", var title: String)
 @Composable
 fun CardComponent(input: List<CardConfig>, action: () -> Unit = {} ){
 
@@ -27,8 +27,8 @@ fun CardComponent(input: List<CardConfig>, action: () -> Unit = {} ){
             ){
                 Row{
                     Image(
-                        painter = painterResource(id = cardConfig.ImageId),
-                        contentDescription = cardConfig.ImageDesc
+                        painter = painterResource(id = cardConfig.imageId),
+                        contentDescription = cardConfig.imageDesc
                     )
                     Box(
                         modifier = Modifier
@@ -37,7 +37,7 @@ fun CardComponent(input: List<CardConfig>, action: () -> Unit = {} ){
                     ) {
                         Column {
                             TextComponent(
-                                text = cardConfig.Title,
+                                text = cardConfig.title,
                                 textColor = Color.Black,
                                 textSize = 15.sp
                             )
@@ -54,23 +54,23 @@ fun CardComponent(input: List<CardConfig>, action: () -> Unit = {} ){
 fun PreviewCard(){
     val inputs = listOf(
         CardConfig(
-            ImageId = R.drawable.dragonball,
-            ImageDesc = "Dragon Ball Z",
-            Title = "DRAGON BALL Z"
+            imageId = R.drawable.dragonball,
+            imageDesc = "Dragon Ball Z",
+            title = "DRAGON BALL Z"
         )
         ,CardConfig(
-            ImageId = R.drawable.naruto,
-            ImageDesc = "Naruto",
-            Title = "NARUTO"
+            imageId = R.drawable.naruto,
+            imageDesc = "Naruto",
+            title = "NARUTO"
         ),
         CardConfig(
-            ImageId = R.drawable.bleach,
-            ImageDesc = "Bleach",
-            Title = "BLEACH"
+            imageId = R.drawable.bleach,
+            imageDesc = "Bleach",
+            title = "BLEACH"
         ), CardConfig(
-            ImageId = R.drawable.onepiece,
-            ImageDesc = "onePiece",
-            Title = "ONEPIECE"
+            imageId = R.drawable.onepiece,
+            imageDesc = "onePiece",
+            title = "ONEPIECE"
         )
     )
 
