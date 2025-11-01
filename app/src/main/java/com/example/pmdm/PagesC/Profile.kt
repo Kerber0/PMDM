@@ -1,4 +1,4 @@
-package com.example.pmdm.pagesC
+package com.example.pmdm.PagesC
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

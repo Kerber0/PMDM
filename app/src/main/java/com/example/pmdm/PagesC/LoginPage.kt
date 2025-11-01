@@ -1,4 +1,4 @@
-package com.example.pmdm.pagesC
+package com.example.pmdm.PagesC
 
 import android.util.Log
 import androidx.compose.foundation.Image
