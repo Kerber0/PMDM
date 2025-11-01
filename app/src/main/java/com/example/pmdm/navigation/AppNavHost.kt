@@ -5,12 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.pmdm.pagesC.DetailsPage
-import com.example.pmdm.pagesC.ListContendPage
-import com.example.pmdm.pagesC.ProfilePage
-import com.example.pmdm.pagesC.StartPage
-import com.example.pmdm.pagesC.LoginPage
-
+import com.example.pmdm.pagesC.*
 
 @Composable
 fun AppNavHost(
@@ -23,10 +18,10 @@ fun AppNavHost(
         startDestination = startDestination.route,
         modifier = modifier
     ) {
-        composable(Destination.Start.route)   { StartPage() }
+        composable(Destination.Start.route) { StartPage() }
         composable(Destination.ListContend.route) { ListContendPage() }
         composable(Destination.Details.route) { DetailsPage() }
         composable(Destination.Profile.route) { ProfilePage() }
-        composable (Destination.Profile.route) {LoginPage()}
+        composable(Destination.Login.route) { LoginPage() }
     }
 }
