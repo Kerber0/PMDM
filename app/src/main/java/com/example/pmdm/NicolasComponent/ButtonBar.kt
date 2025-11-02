@@ -1,52 +1,54 @@
 package com.example.pmdm.nicolasComponent
 
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
-import com.example.pmdm.navigation.Destination
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.NavDestination.Companion.hierarchy
 
 @Composable
 fun NavigationBottomBar(
     navController: NavController,
-    selectedIndex: Int,
-    onItemSelected: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    // Lista local FIJA y sin nulos (evita que un entries "fantasma" meta nulls)
+    val items = listOf(
+        com.example.pmdm.navigation.Destination.Start,
+        com.example.pmdm.navigation.Destination.ListContend,
+        com.example.pmdm.navigation.Destination.Details,
+        com.example.pmdm.navigation.Destination.Profile
+    )
+
+    val backStackEntry by navController.currentBackStackEntryAsState()
+
     NavigationBar(modifier = modifier) {
-        Destination.entries.forEachIndexed { index, destination ->
+        items.forEach { dest ->
+            // seleccionado por jerarquía (robusto con grafos anidados y rutas con args)
+            val selected = backStackEntry
+                ?.destination
+                ?.hierarchy
+                ?.any { it.route == dest.route } == true
+
             NavigationBarItem(
-                selected = selectedIndex == index,
+                selected = selected,
                 onClick = {
-                    navController.navigate(destination.route)
-                    onItemSelected(index)
+                    navController.navigate(dest.route) {
+                        popUpTo(navController.graph.startDestinationId) { saveState = true }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
                 },
-                icon = { Icon(destination.icon, contentDescription = destination.contentDescription) },
-                label = { Text(destination.label) }
+                icon = {
+                    // dest NUNCA es null aquí, porque la lista es fija y no-null
+                    Icon(imageVector = dest.icon, contentDescription = dest.contentDescription)
+                },
+                label = { Text(dest.label) }
             )
         }
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewNavigationBottomBar() {
-    var selectedIndex by remember {
-        mutableStateOf(Destination.entries.indexOf(Destination.Start))
-    }
-
-    // Construimos la barra manualmente, sin navController
-    NavigationBar {
-        Destination.entries.forEachIndexed { index, destination ->
-            NavigationBarItem(
-                selected = selectedIndex == index,
-                onClick = { selectedIndex = index },
-                icon = { Icon(destination.icon, contentDescription = destination.contentDescription) },
-                label = { Text(destination.label) }
-            )
-        }
-    }
-}
-
-

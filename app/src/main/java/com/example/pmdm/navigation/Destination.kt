@@ -14,14 +14,45 @@ sealed class Destination(
     val label: String,
     val contentDescription: String
 ) {
-    object Start : Destination("start", Icons.Default.Home, "Inicio", "Pantalla de inicio")
-    object ListContend : Destination("listContend", Icons.AutoMirrored.Filled.List, "Lista", "Pantalla de lista")
-    object Details : Destination("details", Icons.Default.Info, "Detalles", "Pantalla de detalles")
-    object Profile : Destination("profile", Icons.Default.Person, "Perfil", "Pantalla de perfil")
-    // Mantén Login fuera de entries para que no salga como botón
-    object Login : Destination("login", Icons.Default.AccountBox, "Login", "Pantalla de login")
+    // Pantallas visibles en la BottomBar
+    data object Start : Destination(
+        route = "start",
+        icon = Icons.Default.Home,
+        label = "Inicio",
+        contentDescription = "Pantalla de inicio"
+    )
+
+    data object ListContend : Destination(
+        route = "listContend",
+        icon = Icons.AutoMirrored.Filled.List,
+        label = "Lista",
+        contentDescription = "Pantalla de lista"
+    )
+
+    data object Details : Destination(
+        route = "details",
+        icon = Icons.Default.Info,
+        label = "Detalles",
+        contentDescription = "Pantalla de detalles"
+    )
+
+    data object Profile : Destination(
+        route = "profile",
+        icon = Icons.Default.Person,
+        label = "Perfil",
+        contentDescription = "Pantalla de perfil"
+    )
+
+    // Pantalla fuera de la BottomBar
+    data object Login : Destination(
+        route = "login",
+        icon = Icons.Default.AccountBox,
+        label = "Login",
+        contentDescription = "Pantalla de login"
+    )
 
     companion object {
-        val entries = listOf(Start, ListContend, Details, Profile)
+        // Sólo las pantallas que deben aparecer en la BottomBar
+        val entries: List<Destination> = listOf(Start, ListContend, Details, Profile)
     }
 }
