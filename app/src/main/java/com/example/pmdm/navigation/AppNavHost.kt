@@ -1,13 +1,16 @@
 package com.example.pmdm.navigation
 
+import LoginPage
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import androidx.compose.material3.Text
+import com.example.pmdm.PagesC.DetailsPage
+import com.example.pmdm.PagesC.ListContend
+import com.example.pmdm.PagesC.ProfilePage
+import com.example.pmdm.PagesC.StartPage
+import com.example.pmdm.RicardoComponent.DataProvider
 
 @Composable
 fun AppNavHost(
@@ -19,26 +22,20 @@ fun AppNavHost(
         startDestination = Destination.Start.route,
         modifier = modifier
     ) {
-        composable(Destination.Start.route)       { StartScreen() }
-        composable(Destination.ListContend.route) { ListContendScreen() }
-        composable(Destination.Details.route)     { DetailsScreen() }
-        composable(Destination.Profile.route)     { ProfileScreen() }
-        composable(Destination.Login.route)       { LoginScreen() } // fuera de la barra
+        composable(Destination.Start.route)       { StartPage() }
+        composable(Destination.ListContend.route) { ListContend(navController = navController) }
+        composable(Destination.Profile.route)     { ProfilePage() }
+        composable(Destination.Login.route)       { LoginPage() }
+
+
+        composable("details/{id}") { backStackEntry ->
+            val id = backStackEntry.arguments?.getString("id")?.toIntOrNull()
+            val anime = DataProvider.animeList.find { it.id == id }
+            if(anime != null){
+                DetailsPage(anime)
+            }
+        }
     }
 
 }
 
-/* --------- Stubs de pantallas: reemplázalos por tus composables reales --------- */
-@Composable fun StartScreen()       { Text("Pantalla Inicio") }
-@Composable fun ListContendScreen() { Text("Pantalla Lista") }
-@Composable fun DetailsScreen()     { Text("Pantalla Detalles") }
-@Composable fun ProfileScreen()     { Text("Pantalla Perfil") }
-@Composable fun LoginScreen()       { Text("Pantalla Login") }
-
-/* Preview simple mostrando Start */
-@Preview(showBackground = true)
-@Composable
-private fun AppNavHostPreview() {
-    val navController = rememberNavController()
-    AppNavHost(navController = navController)
-}

@@ -1,5 +1,6 @@
 package com.example.pmdm.ui.theme
 
+import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -18,7 +19,7 @@ private val DarkColorScheme = darkColorScheme(
     tertiary = Pink80,
     background = Fondo_Oscuro,
     primaryFixed = Icon,
-    onPrimary = Fondo_Oscuro
+
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -26,8 +27,7 @@ private val LightColorScheme = lightColorScheme(
     secondary = PurpleGrey40,
     tertiary = Pink40,
     background = Fondo_Claro,
-    primaryFixed = Icon,
-    onPrimary = Fondo_Claro
+    primaryFixed = Icon
 
 
 
@@ -81,7 +81,7 @@ val MaterialTheme.neonTextGradient: Brush
 fun PMDMTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {

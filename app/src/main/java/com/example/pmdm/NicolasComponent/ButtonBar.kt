@@ -16,7 +16,6 @@ fun NavigationBottomBar(
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
-    // Lista local FIJA y sin nulos (evita que un entries "fantasma" meta nulls)
     val items = listOf(
         com.example.pmdm.navigation.Destination.Start,
         com.example.pmdm.navigation.Destination.ListContend,
@@ -28,7 +27,6 @@ fun NavigationBottomBar(
 
     NavigationBar(modifier = modifier) {
         items.forEach { dest ->
-            // seleccionado por jerarquía (robusto con grafos anidados y rutas con args)
             val selected = backStackEntry
                 ?.destination
                 ?.hierarchy
@@ -44,7 +42,6 @@ fun NavigationBottomBar(
                     }
                 },
                 icon = {
-                    // dest NUNCA es null aquí, porque la lista es fija y no-null
                     Icon(imageVector = dest.icon, contentDescription = dest.contentDescription)
                 },
                 label = { Text(dest.label) }

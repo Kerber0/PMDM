@@ -1,5 +1,6 @@
-package com.example.pmdm.ricardoComponent
+package com.example.pmdm.RicardoComponent
 
+import TextFieldComponent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth

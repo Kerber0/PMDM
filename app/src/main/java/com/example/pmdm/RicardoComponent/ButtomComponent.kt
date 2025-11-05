@@ -1,4 +1,4 @@
-package com.example.pmdm.ricardoComponent
+package com.example.pmdm.RicardoComponent
 
 import android.util.Log
 import androidx.compose.foundation.layout.Box
@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun ButtomComponent(text: String, action: () -> Unit){
     Box(modifier = Modifier
-        .width(width = 160.dp)
+        .width(width = 110.dp)
         .height(height = 50.dp)
     ){
         Button(
@@ -31,7 +31,7 @@ fun ButtomComponent(text: String, action: () -> Unit){
                 disabledContentColor = Color.Red
             )
         ) {
-            TextComponent(text = text, textSize = 10.sp)
+            TextComponent(text = text, textSize = 8.sp)
         }
     }
 }

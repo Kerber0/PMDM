@@ -1,5 +1,3 @@
-package com.example.pmdm.PagesC
-
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -21,17 +19,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pmdm.R
-import com.example.pmdm.ricardoComponent.BlockInputsData
-import com.example.pmdm.ricardoComponent.ButtomComponent
-import com.example.pmdm.ricardoComponent.InputFieldConfig
+import com.example.pmdm.RicardoComponent.BlockInputsData
+import com.example.pmdm.RicardoComponent.ButtomComponent
+import com.example.pmdm.RicardoComponent.InputFieldConfig
 
 @Composable
 fun LoginPage(){
     Box(modifier = Modifier.fillMaxSize()) {
 
         Image(
-            painter = painterResource(id = R.drawable.fondo),
-            contentDescription = "Fondo Imagen Genereico",
+            painter = painterResource(id = R.drawable.login_page),
+            contentDescription = "Fondo de pantalla de Login",
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop
         )
@@ -44,7 +42,7 @@ fun LoginPage(){
                 contentAlignment = Alignment.TopEnd
             ){
                 Image(
-                    painter = painterResource(id = R.drawable.tema_oscuro),
+                    painter = painterResource(id = R.drawable.logo),
                     contentDescription = "Logo Imagen Generico",
                     modifier = Modifier
                         .size(90.dp)
@@ -60,27 +58,27 @@ fun LoginPage(){
             ){
                 val inputs = listOf(
                     InputFieldConfig(
-                        textLabel = "USER:",
-                        textValue = "INTRODUCE USUARIO"
+                        TextLabel = "USER:   ",
+                        TextValue = "ENTER USER"
                     ),
                     InputFieldConfig(
-                        textLabel = "EMAIL:",
-                        textValue = "INTRODUCE EMAIL"
+                        TextLabel = "EMAIL: ",
+                        TextValue = "ENTER EMAIL"
                     ),
                     InputFieldConfig(
-                        textLabel = "PASSWORD:",
-                        textValue = "INTRODUCE PASSWORD"
+                        TextLabel = "PASS:   ",
+                        TextValue = "ENTER PASSWORD"
                     ),
                     InputFieldConfig(
-                        textLabel = "REPITE:",
-                        textValue = "CONFIRMA CONTRASEÑA"
+                        TextLabel = "CONFIRM:",
+                        TextValue = "CONFIRM PASS"
                     )
                 )
 
                 BlockInputsData(
                     title = "REGISTRO",
                     input = inputs,
-                    borderColor = Color.Red
+                    borderColor = Color.White
                 )
             }
 
@@ -89,7 +87,7 @@ fun LoginPage(){
             ){
                 Row(
                     modifier = Modifier.padding(10.dp),
-                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                    horizontalArrangement = Arrangement.spacedBy(5.dp)
                 ) {
                     ButtomComponent(text = "CREAR CUENTA") {
                         Log.e("Prueba","Clieck en crear cuenta")
@@ -97,6 +95,10 @@ fun LoginPage(){
 
                     ButtomComponent(text = "INICIAR SECION") {
                         Log.e("Prueba2","Click en inicar secion")
+                    }
+
+                    ButtomComponent(text = "INVITADO") {
+                        Log.e("Prueba3","Click en invitado")
                     }
                 }
             }

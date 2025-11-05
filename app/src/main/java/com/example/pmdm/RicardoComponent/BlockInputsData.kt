@@ -1,4 +1,4 @@
-package com.example.pmdm.ricardoComponent
+package com.example.pmdm.RicardoComponent
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -17,15 +17,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 data class InputFieldConfig(
-    val textLabel: String,
-    val textValue: String
+    val TextLabel: String,
+    val TextValue: String
 )
 @Composable
 fun BlockInputsData(
-    modifier: Modifier = Modifier,
     title: String = "REGISTRATE",
     input: List<InputFieldConfig>,
-
+    modifier: Modifier = Modifier,
     borderColor: Color = Color.Black
 ){
     Box(modifier = Modifier
@@ -57,8 +56,8 @@ fun BlockInputsData(
             ) {
                 input.forEach { inputConfig ->
                     InputDataComponent(
-                        textValue = inputConfig.textLabel,
-                        textInfo = inputConfig.textValue
+                        textValue = inputConfig.TextLabel,
+                        textInfo = inputConfig.TextValue
                     )
                 }
             }
@@ -71,20 +70,20 @@ fun BlockInputsData(
 fun PreviewInputs(){
     val inputs = listOf(
         InputFieldConfig(
-            textLabel = "USER:",
-            textValue = "INTRODUCE USUARIO"
+            TextLabel = "USER:",
+            TextValue = "INTRODUCE USUARIO"
         ),
         InputFieldConfig(
-            textLabel = "EMAIL:",
-            textValue = "INTRODUCE EMAIL"
+            TextLabel = "EMAIL:",
+            TextValue = "INTRODUCE EMAIL"
         ),
         InputFieldConfig(
-            textLabel = "PASSWORD:",
-            textValue = "INTRODUCE PASSWORD"
+            TextLabel = "PASSWORD:",
+            TextValue = "INTRODUCE PASSWORD"
         ),
         InputFieldConfig(
-            textLabel = "REPITE:",
-            textValue = "CONFIRMA CONTRASEÑA"
+            TextLabel = "REPITE:",
+            TextValue = "CONFIRMA CONTRASEÑA"
         )
     )
     BlockInputsData(input = inputs)
