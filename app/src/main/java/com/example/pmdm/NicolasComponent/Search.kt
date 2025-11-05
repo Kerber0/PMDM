@@ -1,76 +1,79 @@
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ListItem
-import androidx.compose.material3.SearchBar
-import androidx.compose.material3.SearchBarDefaults
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.semantics.isTraversalGroup
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.traversalIndex
 import androidx.compose.ui.tooling.preview.Preview
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SimpleSearchBar(
-    textFieldState: TextFieldState,
-    onSearch: (String) -> Unit,
-    searchResults: List<String>,
-    modifier: Modifier = Modifier
+fun SearchToggle(
+    modifier: Modifier = Modifier,
+    hint: String = "Buscar...",
+    results: List<String> = emptyList(),
+    onSearch: (String) -> Unit = {},
+    onResultClick: (String) -> Unit = {}
 ) {
-    // Controls expansion state of the search bar
-    var expanded by rememberSaveable { mutableStateOf(false) }
+    var active by rememberSaveable { mutableStateOf(false) }
+    var query by rememberSaveable { mutableStateOf("") }
 
-    Box(
-        modifier
-            .fillMaxSize()
-            .semantics { isTraversalGroup = true }
-    ) {
+    Box(modifier = modifier.fillMaxWidth()) {
+
+        // 1) Sólo se ve este botón cuando no está activa la barra
+        if (!active) {
+            IconButton(
+                modifier = Modifier.align(Alignment.CenterEnd),
+                onClick = { active = true }
+            ) {
+                Icon(Icons.Default.Search, contentDescription = "Buscar")
+            }
+        }
+
         SearchBar(
             modifier = Modifier
                 .align(Alignment.TopCenter)
-                .semantics { traversalIndex = 0f },
-            inputField = {
-                SearchBarDefaults.InputField(
-                    query = textFieldState.text.toString(),
-                    onQueryChange = { textFieldState.edit { replace(0, length, it) } },
-                    onSearch = {
-                        onSearch(textFieldState.text.toString())
-                        expanded = false
-                    },
-                    expanded = expanded,
-                    onExpandedChange = { expanded = it },
-                    placeholder = { Text("Search") }
-                )
+                .fillMaxWidth(),
+            query = query,
+            onQueryChange = { query = it },
+            onSearch = {
+                onSearch(query)
+                // Si quieres que se cierre al buscar, descomenta:
+                // active = false
             },
-            expanded = expanded,
-            onExpandedChange = { expanded = it },
+            active = active,
+            onActiveChange = { active = it },
+            placeholder = { Text(hint) },
+            leadingIcon = {
+                Icon(Icons.Default.Search, contentDescription = null)
+            },
+            trailingIcon = {
+                IconButton(onClick = {
+                    if (query.isNotEmpty()) {
+                        query = ""
+                    } else {
+                        active = false
+                    }
+                }) { Icon(Icons.Default.Close, null) }
+            }
         ) {
-            // Display search results in a scrollable column
             Column(Modifier.verticalScroll(rememberScrollState())) {
-                searchResults.forEach { result ->
+                results.forEach { r ->
                     ListItem(
-                        headlineContent = { Text(result) },
+                        headlineContent = { Text(r) },
                         modifier = Modifier
-                            .clickable {
-                                textFieldState.edit { replace(0, length, result) }
-                                expanded = false
-                            }
                             .fillMaxWidth()
+                            .clickable {
+                                onResultClick(r)
+                                query = r
+                                active = false
+                            }
                     )
                 }
             }
@@ -78,8 +81,15 @@ fun SimpleSearchBar(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun searchPreview() {
-    SimpleSearchBar()
+private fun SearchTogglePreview() {
+    MaterialTheme {
+        Surface {
+            SearchToggle(
+                results = listOf("Naruto", "Bleach", "One Piece"),
+                onSearch = { /* TODO */ }
+            )
+        }
+    }
 }

@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -22,6 +23,10 @@ import com.example.pmdm.R
 import com.example.pmdm.ui.theme.PMDMTheme
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import com.example.pmdm.ui.theme.neonTextGradient
 
 
@@ -29,16 +34,28 @@ import com.example.pmdm.ui.theme.neonTextGradient
 @Composable
 fun Toolbar() {
     isSystemInDarkTheme()
+    var searchActive by rememberSaveable { mutableStateOf(false) }
     val logoRes =  R.drawable.logo
 
     CenterAlignedTopAppBar(
         title = {
+
             Image(
                 painter = painterResource(id = logoRes),
                 contentDescription = "Logo de la app",
                 modifier = Modifier.size(160.dp)
             )
         },
+        navigationIcon = {
+            IconButton(
+                onClick = { searchActive = true } // 👈 abre la barra
+            ) {
+                Icon(Icons.Default.Search,
+                    contentDescription = "Buscar",
+                    tint = MaterialTheme.colorScheme.background)
+            }
+        },
+
         actions = {
             IconButton(
                 onClick = { Log.e("Msg", "Botón de ajustes") },
